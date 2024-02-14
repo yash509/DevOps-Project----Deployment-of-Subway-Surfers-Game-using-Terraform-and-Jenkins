@@ -14,7 +14,6 @@
         steps {
           dir('K8s/ssh_key') {
             sh 'ssh-keygen -t rsa -b 2048 -f k8s -N "" -q -y'
-            sh "chmod 400 k8s"
           }
         }
       }
