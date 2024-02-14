@@ -42,4 +42,7 @@
 
 
 
-// Generate SSH public and private keys manually on server using command ""ssh-keygen -t rsa -f k8s"" in the 
+// Generate SSH public and private keys manually on server using command ""sudo ssh-keygen -t rsa -f k8s"" in the "/k8s/ssh_key" path. Before running the above 
+// Pipeline Script 
+---
+// then use the command ""sudo chmod 777 k8s""
