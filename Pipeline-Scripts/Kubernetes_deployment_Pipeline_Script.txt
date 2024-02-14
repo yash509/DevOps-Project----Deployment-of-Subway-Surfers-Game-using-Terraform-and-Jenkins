@@ -23,3 +23,15 @@
                     }
                 }
             }
+
+
+
+
+// this """""""""""""""""""withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'sa-token', namespace: 'subway', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.82.30:6443')"""""""""""""""""" command need to get replaced with the command you will generate by performing some steps:-
+                                // 1. Click on "Configure" on left side. 
+                                // 2. Go to pipeline -> Go to pipeline syntax.
+                                // 3. In the Sample step -> Search for withKubeConfig.
+                                // 4. Select Your credential. 
+                                // 5. k8s server endpoint - paste the server endpoint from the config file. 
+                                // 6. enter the cluster name.
+                                // 7. Finally, Go to Generate and copy the generated Syntax.
