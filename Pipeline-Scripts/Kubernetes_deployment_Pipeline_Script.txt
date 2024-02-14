@@ -1,0 +1,25 @@
+            pipeline {
+                agent any
+
+                stages {
+                    stage('Clear Workspace'){
+                        steps{
+                            cleanWs()
+                        }
+                    }
+                    stage('Git SCM') {
+                        steps {
+                            git branch: 'main', url: 'https://github.com/yash509/DevOps-Project----Deployment-of-Subway-Surfers-Game-using-Terraform-and-Jenkins.git'
+                        }
+                    }
+                    stage('Deployment on k8s cluster') {
+                        steps {
+                            dir('subway'){
+                                withKubeConfig(caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'sa-token', namespace: 'subway', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.82.30:6443') {
+                                    sh "kubectl apply -f deployment.yml"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
