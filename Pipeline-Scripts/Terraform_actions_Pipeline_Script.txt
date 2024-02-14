@@ -37,3 +37,9 @@
       }
     }
   }
+
+
+
+
+
+// Generate SSH public and private keys manually on server using command ""ssh-keygen -t rsa -f k8s"" in the 
