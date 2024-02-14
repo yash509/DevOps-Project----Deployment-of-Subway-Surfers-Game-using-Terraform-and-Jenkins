@@ -1,0 +1,40 @@
+
+  pipeline {
+    agent any
+    parameters {
+      choice choices: ['apply', 'destroy'], description: 'Terraform flow', name: 'WORKFLOW'
+    }
+    stages {
+      stage ('Git Checkout') {
+        steps {
+          git branch: 'main', url: 'https://github.com/yash509/DevOps-Project----Deployment-of-Subway-Surfers-Game-using-Terraform-and-Jenkins.git'
+        }
+      }
+      stage ('Create SSH Key and Modify the Permission') {
+        steps {
+          dir('K8s/ssh_key') {
+            sh 'ssh-keygen -t rsa -b 2048 -f k8s -N "" -q -y'
+            sh "chmod 400 k8s"
+          }
+        }
+      }
+      stage ('Terraform Init') {
+        steps {
+          dir('K8s') {
+            withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+              sh "terraform init"
+            }
+          }
+        }
+      }
+      stage ('Terraform apply or destroy') {
+        steps {
+          dir('K8s'){
+            withCredentials([usernamePassword(credentialsId: 'awscred', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+              sh "terraform ${WORKFLOW} --auto-approve"
+            }
+          }
+        }
+      }
+    }
+  }
