@@ -4,13 +4,32 @@ metadata:
   name: subway
   labels:
     name: subway-ns
+
+
+
+
 ---
+
+
+
+
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: jenkins
   namespace: subway
+
+
+
+
+
 ---
+
+
+
+
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -29,7 +48,17 @@ rules:
       - serviceaccounts
       - services
     verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
+
+
+
+
+
 ---
+
+
+
+
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -43,7 +72,17 @@ subjects:
 - namespace: subway 
   kind: ServiceAccount
   name: jenkins
+
+
+
+
+
 ---
+
+
+
+
+
 apiVersion: v1
 kind: Secret
 metadata:
